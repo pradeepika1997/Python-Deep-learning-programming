@@ -6,5 +6,5 @@ for str in f.read().split():
         wordcount[str] = 1
     else:
         wordcount[str] += 1
-print(str,wordcount)
-
+print("Output written in file")
+print(wordcount, file=open("output.txt", "w"))
