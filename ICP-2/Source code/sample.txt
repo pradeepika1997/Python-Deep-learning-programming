@@ -1,2 +1,2 @@
-Python Course
+Python Course PYTHON
 Deep Learning Course 
