@@ -3,7 +3,7 @@ nltk.download('maxent_ne_chunker')
 nltk.download('words')
 f = open('input.txt', 'r',encoding='utf-8')
 input = f.read()
-sent_tokens = nltk.sent_tokenize('the quick red fox jumps over the lazy brown dog. This is a sentence')
+sent_tokens = nltk.sent_tokenize(input)
 for i in sent_tokens:
     word_tokens = nltk.word_tokenize(i)
     for j in range(len(word_tokens)-2):
