@@ -12,6 +12,28 @@ boston = pd.DataFrame(bh_data.data, columns=bh_data.feature_names)
 print(boston.columns)
 boston['MEDV'] = bh_data.target
 
+### Before performing EDA
+#Splitting the data
+A = boston.drop('MEDV', axis=1)
+B = boston['MEDV']
+A_train, A_test, B_train, B_test = train_test_split(A, B, test_size = 0.2, random_state=9)
+
+#creation of regression model and training it before performing EDA
+model=LinearRegression().fit(A_train,B_train)
+
+#predicting the target
+p=model.predict(A_test)
+
+#evaluation of model using metrics
+MSE_1 = mean_squared_error(B_test, p)
+r2_score_1= r2_score(B_test,p)
+print("Mean squared error :",MSE_1)
+print("R2 score : ",r2_score_1)
+
+
+### After Performing EDA
+
+
 ### Displaying null value count
 nulls = pd.DataFrame(boston.isnull().sum().sort_values(ascending=False)[:25])
 nulls.columns = ['Null Count']
@@ -20,12 +42,6 @@ print(nulls)
 
 ###Replacing null values with mean
 boston = boston.select_dtypes(include=[np.number]).interpolate().dropna()
-
-## Displaying Null value count after replacing with mean
-nulls = pd.DataFrame(boston.isnull().sum().sort_values(ascending=False)[:25])
-nulls.columns = ['Null Count']
-nulls.index.name = 'Feature'
-print(nulls)
 
 ###Finding correlation with target class
 numeric_features = boston.select_dtypes(include=[np.number])
